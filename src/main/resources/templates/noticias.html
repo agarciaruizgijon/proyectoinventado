@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat</title>
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #eee;
+            text-align: center;
+        }
+		
+		h1{
+			font-family: fantasy;
+			font-size: 50px;
+		}
+		
+        .caja {
+            background-color: dodgerblue;
+            border-radius: 20px;
+            margin: 50px auto;
+            padding: 20px;
+            width: 250px;
+        }
+        h2 {
+            color: black;
+        }
+        .texto {
+            height: 30px;
+            width: 100%;
+            border-radius: 20px;
+            margin-top: 10px;
+        }
+        .boton {
+            height: 30px;
+            width: 100px;
+            margin-top: 10px;
+            border-radius: 20px;
+            border: none;
+            cursor: pointer;
+        }
+        .boton:hover {
+            background-color: yellow;
+        }
+        .lista {
+            list-style: none;
+            padding: 0;
+            margin-top: 15px;
+        }
+        .item {
+            background-color: #eee;
+            border-radius: 20px;
+            padding: 8px;
+            margin-bottom: 8px;
+            text-align: left;
+        }
+        .salir {
+            display: block;
+            margin-top: 15px;
+            color: white;
+            text-decoration: none;
+        }
+        .salir:hover {
+            color: yellow;
+        }
+		
+		li {
+			background-color: white;
+			border-radius: 15px;
+			margin-bottom: 15px;
+			padding: 10px;
+			text-align: left;
+		}
+		.fecha{
+			font-size: 13px;
+			text-decoration: underline;
+		}
+		
+		ul {
+		  list-style-type: none;
+		  padding-left: 0;
+		}
+
+    </style>
+</head>
+<body>
+	<h1>SpringChat</h1>
+    <div class="caja">
+        <h2>¡Bienvenido, <span th:text="${nombreUsuario}">Usuario</span>!</h2>
+
+		<ul>
+		    <li th:each="noticia : ${noticias}">		        
+		        <strong th:text="${noticia.usuario.nombre}"></strong>: 		        
+		        <span class="fecha" th:text="${noticia.fecha}"></span>
+				<hr> 		        
+		        <span th:text="${noticia.texto}"></span>
+		    </li>
+		</ul>
+
+		<form action="/agregar-noticia" method="post">
+		    <input class="texto" type="text" name="texto" placeholder="Escribe tu mensaje" required>
+		    <button class="boton" type="submit">Agregar</button>
+		</form>
+		
+        <a class="salir" href="/deletecookie">Cerrar sesión</a>
+    </div>
+</body>
+</html>
