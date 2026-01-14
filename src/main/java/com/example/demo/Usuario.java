@@ -2,62 +2,65 @@ package com.example.demo;
 
 import jakarta.persistence.*;
 import java.util.List;
+import java.util.ArrayList; // Importante para inicializar la lista
 
 @Entity
 @Table(name = "usuarios")
 public class Usuario {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Column(unique = true) // El nombre no se puede repetir
-	private String nombre;
+    @Column(unique = true) // En MySQL esto impedirá que dos usuarios se llamen igual
+    private String nombre;
 
-	private String contrasena;
+    private String contrasena;
 
-	//Un usuario tiene muchos mensajes
-	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-	private List<Mensaje> mensajes;
+    // Un usuario tiene muchos mensajes
+    // 'mappedBy' indica que la dueña de la relación es la variable "usuario" en la clase Mensaje
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<Mensaje> mensajes = new ArrayList<>(); // Inicializamos la lista vacía para evitar errores
 
-	public Usuario() {
-	}
+    public Usuario() {
+    }
 
-	public Usuario(String nombre, String contrasena) {
-		this.nombre = nombre;
-		this.contrasena = contrasena;
-	}
+    public Usuario(String nombre, String contrasena) {
+        this.nombre = nombre;
+        this.contrasena = contrasena;
+    }
 
-	// Getters y Setters
-	public Long getId() {
-		return id;
-	}
+    // --- GETTERS Y SETTERS ---
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public String getNombre() {
-		return nombre;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	public String getContrasena() {
-		return contrasena;
-	}
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-	public void setContrasena(String contrasena) {
-		this.contrasena = contrasena;
-	}
+    public String getContrasena() {
+        return contrasena;
+    }
 
-	public List<Mensaje> getMensajes() {
-		return mensajes;
-	}
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
 
-	public void setMensajes(List<Mensaje> mensajes) {
-		this.mensajes = mensajes;
-	}
+    public List<Mensaje> getMensajes() {
+        return mensajes;
+    }
+
+    public void setMensajes(List<Mensaje> mensajes) {
+        this.mensajes = mensajes;
+    }
 }

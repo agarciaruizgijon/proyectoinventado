@@ -1,58 +1,65 @@
 package com.example.demo;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
 
 @Entity
 @Table(name = "mensajes")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class Mensaje {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	private String texto;
-	private String fecha;
+    private String texto;
+    private String fecha;
 
-	//Muchos mensajes pertenecen a Un usuario
-	@ManyToOne
-	@JoinColumn(name = "usuario_id", nullable = false) // Foreign Key
-	private Usuario usuario;
+    // Muchos mensajes pertenecen a Un usuario
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", nullable = false) // Esto crea la Foreign Key en MySQL
+    private Usuario usuario;
 
-	public Long getId() {
-		return id;
-	}
+    // Constructor vacío (obligatorio para JPA)
+    public Mensaje() {
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    // Constructor lleno (útil para crear mensajes rápido)
+    public Mensaje(String texto, String fecha, Usuario usuario) {
+        this.texto = texto;
+        this.fecha = fecha;
+        this.usuario = usuario;
+    }
 
-	public String getTexto() {
-		return texto;
-	}
+    // --- GETTERS Y SETTERS MANUALES ---
 
-	public void setTexto(String texto) {
-		this.texto = texto;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public String getFecha() {
-		return fecha;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setFecha(String fecha) {
-		this.fecha = fecha;
-	}
+    public String getTexto() {
+        return texto;
+    }
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
+    public void setTexto(String texto) {
+        this.texto = texto;
+    }
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 }
