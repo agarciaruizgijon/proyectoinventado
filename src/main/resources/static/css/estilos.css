@@ -1,0 +1,83 @@
+body {
+
+	font-family: 'Segoe UI', sans-serif;
+	background-color: #f0f2f5;
+	text-align: center;
+	padding-top: 50px;
+}
+
+h1 {
+	color: dodgerblue;
+	font-size: 3em;
+	margin-bottom: 10px;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	display: flex;
+	justify-content: center;
+	gap: 20px;
+	flex-wrap: wrap;
+}
+
+.card {
+	background: white;
+	padding: 30px;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	width: 300px;
+}
+
+input {
+	width: 90%;
+	padding: 10px;
+	margin: 10px 0;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+
+button {
+	width: 100%;
+	padding: 10px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	color: white;
+	font-weight: bold;
+}
+
+.btn-login {
+	background-color: dodgerblue;
+}
+
+.btn-register {
+	background-color: #42b72a;
+}
+
+.btn-login:hover {
+	background-color: blue;
+}
+
+.btn-register:hover {
+	background-color: darkgreen;
+}
+
+.alerta {
+	background-color: #ffcccc;
+	color: red;
+	padding: 10px;
+	border-radius: 5px;
+	margin-bottom: 20px;
+	display: inline-block;
+}
+
+.exito {
+	background-color: #ccffcc;
+	color: green;
+	padding: 10px;
+	border-radius: 5px;
+	margin-bottom: 20px;
+	display: inline-block;
+}

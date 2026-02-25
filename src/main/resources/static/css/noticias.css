@@ -1,0 +1,94 @@
+body {
+           font-family: Arial;
+           background-color: #eee;
+           text-align: center;
+       }
+	
+	h1{
+		font-family: fantasy;
+		font-size: 50px;
+	}
+	
+       .caja {
+           background-color: dodgerblue;
+           border-radius: 20px;
+           margin: 50px auto;
+           padding: 20px;
+           width: 250px;
+       }
+       h2 {
+           color: black;
+       }
+       .texto {
+           height: 30px;
+           width: 100%;
+           border-radius: 20px;
+           margin-top: 10px;
+       }
+       .boton {
+           height: 30px;
+           width: 100px;
+           margin-top: 10px;
+           border-radius: 20px;
+           border: none;
+           cursor: pointer;
+       }
+       .boton:hover {
+           background-color: yellow;
+       }
+       .lista {
+           list-style: none;
+           padding: 0;
+           margin-top: 15px;
+       }
+       .item {
+           background-color: #eee;
+           border-radius: 20px;
+           padding: 8px;
+           margin-bottom: 8px;
+           text-align: left;
+       }
+       .salir {
+           display: block;
+           margin-top: 15px;
+           color: white;
+           text-decoration: none;
+       }
+       .salir:hover {
+           color: yellow;
+       }
+	
+	li {
+		background-color: white;
+		border-radius: 15px;
+		margin-bottom: 15px;
+		padding: 10px;
+		text-align: left;
+	}
+	.fecha{
+		font-size: 13px;
+		text-decoration: underline;
+	}
+	
+	ul {
+	  list-style-type: none;
+	  padding-left: 0;
+	}
+	
+	.canal-card {
+	    border: 1px solid #ccc;
+	    padding: 15px;
+	    margin: 10px 0;
+	    border-radius: 8px;
+	    background-color: #f9f9f9;
+	    text-align: left;
+	}
+	.btn-entrar {
+	    background-color: dodgerblue; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;
+	}
+	.btn-borrar {
+	    background-color: red; color: white; padding: 5px 10px; border: none; border-radius: 5px; cursor: pointer;
+	}
+	.acciones {
+	    display: flex; gap: 10px; margin-top: 10px;
+	}

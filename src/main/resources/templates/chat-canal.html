@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="'Sala: ' + ${canal.nombre}">Chat</title>
+    <link rel="stylesheet" th:href="@{/css/noticias.css}">
+</head>
+<body>
+    
+    <div style="text-align: left; padding: 10px;">
+        <a th:href="@{/canales}" style="text-decoration: none; color: dodgerblue; font-weight: bold;">
+            &#8592; Volver a las salas
+        </a>
+    </div>
+
+    <h1>SpringChat - <span th:text="${canal.nombre}"></span></h1>
+    <p style="text-align: center; color: gray;" th:text="${canal.descripcion}"></p>
+
+    <div class="caja">
+        <h2>Hablando como: <span th:text="${nombreUsuario}"></span></h2>
+
+        <ul>
+            <li th:if="${#lists.isEmpty(noticias)}" style="text-align:center; color:gray; list-style:none;">
+                Aún no hay mensajes en esta sala. ¡Sé el primero!
+            </li>
+            <li th:each="noticia : ${noticias}">                
+                <strong th:text="${noticia.usuario.nombre}"></strong>:                 
+                <span class="fecha" th:text="${noticia.fecha}"></span>
+                <hr>                 
+                <span th:text="${noticia.texto}"></span>
+            </li>
+        </ul>
+
+        <form th:action="@{/agregar-noticia}" method="post">
+            <input type="hidden" name="canalId" th:value="${canal.id}">
+            
+            <input class="texto" type="text" name="texto" placeholder="Escribe tu mensaje en esta sala" required>
+            <button class="boton" type="submit">Enviar</button>
+        </form>
+        
+    </div>
+</body>
+</html>

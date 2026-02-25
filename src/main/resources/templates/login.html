@@ -4,125 +4,56 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Acceso SpringChat</title>
-	<style>
-		body {
-
-			font-family: 'Segoe UI', sans-serif;
-			background-color: #f0f2f5;
-			text-align: center;
-			padding-top: 50px;
-		}
-
-		h1 {
-			color: dodgerblue;
-			font-size: 3em;
-			margin-bottom: 10px;
-		}
-
-		.container {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			display: flex;
-			justify-content: center;
-			gap: 20px;
-			flex-wrap: wrap;
-		}
-
-		.card {
-			background: white;
-			padding: 30px;
-			border-radius: 10px;
-			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-			width: 300px;
-		}
-
-		input {
-			width: 90%;
-			padding: 10px;
-			margin: 10px 0;
-			border: 1px solid #ccc;
-			border-radius: 5px;
-		}
-
-		button {
-			width: 100%;
-			padding: 10px;
-			border: none;
-			border-radius: 5px;
-			cursor: pointer;
-			color: white;
-			font-weight: bold;
-		}
-
-		.btn-login {
-			background-color: dodgerblue;
-		}
-
-		.btn-register {
-			background-color: #42b72a;
-		}
-
-		.btn-login:hover {
-			background-color: blue;
-		}
-
-		.btn-register:hover {
-			background-color: darkgreen;
-		}
-
-		.alerta {
-			background-color: #ffcccc;
-			color: red;
-			padding: 10px;
-			border-radius: 5px;
-			margin-bottom: 20px;
-			display: inline-block;
-		}
-
-		.exito {
-			background-color: #ccffcc;
-			color: green;
-			padding: 10px;
-			border-radius: 5px;
-			margin-bottom: 20px;
-			display: inline-block;
-		}
-	</style>
+	<link rel="stylesheet" th:href="@{/css/estilos.css}">
 </head>
 
 <body>
 
 	<h1>SpringChat</h1>
 
-	<div th:if="${error}" class="alerta">
-		<span th:text="${error}"></span>
-	</div>
-	<div th:if="${exito}" class="exito">
-		<span th:text="${exito}"></span>
-	</div>
-
-	<div class="container">
-		<div class="card">
-			<h2>Iniciar Sesión</h2>
-			<form action="/login" method="post">
-				<input type="text" name="nombre" placeholder="Usuario" required>
-				<input type="password" name="contrasena" placeholder="Contraseña" required>
-				<button type="submit" class="btn-login">Entrar</button>
-			</form>
+	<div th:if="${param.error}" class="alerta">
+		    <span>Usuario o contraseña incorrectos</span>
+		</div>
+		<div th:if="${param.logout}" class="exito">
+		    <span>Has cerrado sesión correctamente</span>
 		</div>
 
-		<div class="card">
-			<h2>Registrarse</h2>
-			<p>¿Nuevo aquí?</p>
-			<form action="/register" method="post">
-				<input type="text" name="nombre" placeholder="Elige Usuario" required>
-				<input type="password" name="contrasena" placeholder="Elige Contraseña" required>
-				<button type="submit" class="btn-register">Crear Cuenta</button>
-			</form>
+		<div th:if="${error}" class="alerta">
+			<span th:text="${error}"></span>
 		</div>
-	</div>
+		<div th:if="${exito}" class="exito">
+			<span th:text="${exito}"></span>
+		</div>
 
+		<div class="container">
+			<div class="card">
+				<h2 th:text="#{login.titulo}">Iniciar Sesión</h2>
+				<form th:action="@{/login}" method="post">
+				    <input type="text" name="nombre" th:placeholder="#{login.usuario}" required>
+				    <input type="password" name="contrasena" th:placeholder="#{login.contrasena}" required>
+				    <button type="submit" class="btn-login" th:text="#{login.boton.entrar}">Entrar</button>
+				</form>
+			</div>
+
+			<div class="card">
+				<h2 th:text="#{login.registro.titulo}">Registrarse</h2>
+				<p th:text="#{login.registro.pregunta}">¿Nuevo aquí?</p>
+				<form th:action="@{/register}" method="post">
+				        <input type="text" name="nombre" th:placeholder="#{login.usuario}" required>
+				        
+				        <input type="email" name="email" placeholder="Correo electrónico" required>
+				        
+				        <input type="password" name="contrasena" th:placeholder="#{login.contrasena}" required>
+				        <button type="submit" class="btn-register" th:text="#{login.boton.crear}">Crear Cuenta</button>
+				    </form>
+			</div>
+		</div>
+
+		<div style="text-align: right; padding: 10px;">
+		    <a th:href="@{/(lang=es)}">🇪🇸 Español</a> | 
+		    <a th:href="@{/(lang=en)}">🇬🇧 English</a>
+		</div>
+		
 </body>
 
 </html>

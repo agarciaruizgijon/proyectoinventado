@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Salas de Chat - SpringChat</title>
+    <link rel="stylesheet" th:href="@{/css/noticias.css}">
+</head>
+<body>
+    <h1 th:text="#{canales.titulo.principal}">Salas de SpringChat</h1>
+    
+    <div class="caja">
+        <h2><span th:text="#{saludo.hola}">Hola</span>, <span th:text="${usuarioLogueado.nombre}"></span></h2>
+
+        <div th:if="${param.error == 'limite'}" class="alerta" style="color:red; background:#ffcccc; padding:10px;" th:text="#{error.limite}">
+            ¡Has alcanzado el límite máximo de 3 canales creados!
+        </div>
+        <div th:if="${param.error == 'existe'}" class="alerta" style="color:red; background:#ffcccc; padding:10px;" th:text="#{error.existe}">
+            Ya existe un canal con ese nombre. Elige otro.
+        </div>
+        <div th:if="${param.error == 'nopermiso'}" class="alerta" style="color:red; background:#ffcccc; padding:10px;" th:text="#{error.nopermiso}">
+            No tienes permiso para borrar un canal que no es tuyo.
+        </div>
+
+        <div style="background: #eef; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+            <h3 th:text="#{canales.crear.titulo}">Crear nueva sala</h3>
+            <form th:action="@{/crear-canal}" method="post">
+                <input type="text" name="nombre" th:placeholder="#{canales.input.nombre}" required style="margin-bottom: 5px; width: 90%;"><br>
+                <input type="text" name="descripcion" th:placeholder="#{canales.input.descripcion}" required style="margin-bottom: 10px; width: 90%;"><br>
+                <button type="submit" style="background-color: #42b72a; color: white; padding: 8px; border: none; border-radius: 5px; cursor: pointer;" th:text="#{canales.boton.crear}">Crear Canal</button>
+            </form>
+        </div>
+
+        <hr>
+
+        <h3 th:text="#{canales.lista.titulo}">Canales disponibles:</h3>
+        <div th:if="${#lists.isEmpty(canales)}">
+            <p th:text="#{canales.lista.vacia}">Todavía no hay ningún canal. ¡Anímate a crear el primero!</p>
+        </div>
+
+        <div th:each="canal : ${canales}" class="canal-card">
+            <h4 th:text="${canal.nombre}" style="margin: 0 0 5px 0; color: dodgerblue;"></h4>
+            <p th:text="${canal.descripcion}" style="margin: 0 0 10px 0; font-size: 0.9em;"></p>
+            <small style="color: gray;"><span th:text="#{canales.creado.por}">Creado por:</span> <strong th:text="${canal.creador.nombre}"></strong></small>
+            
+            <div class="acciones">
+                <a th:href="@{/canal/{id}(id=${canal.id})}" class="btn-entrar" th:text="#{canales.boton.entrar}">Entrar al Chat</a>
+
+                <form th:if="${canal.creador.id == usuarioLogueado.id}" 
+                      th:action="@{/borrar-canal/{id}(id=${canal.id})}" method="post">
+                    <button type="submit" class="btn-borrar" th:text="#{canales.boton.borrar}">Borrar Canal</button>
+                </form>
+            </div>
+        </div>
+
+        <form th:action="@{/logout}" method="post" style="margin-top: 20px;">
+            <button type="submit" style="border:none; background:none; cursor:pointer; text-decoration:underline; color:red;" th:text="#{boton.cerrar.sesion}">
+                Cerrar sesión
+            </button>
+        </form>
+    </div>
+	
+	<div style="text-align: right; padding: 10px;">
+	    <a th:href="@{''(lang=es)}">🇪🇸 Español</a> | 
+	    <a th:href="@{''(lang=en)}">🇬🇧 English</a>
+	</div>
+	
+</body>
+</html>
